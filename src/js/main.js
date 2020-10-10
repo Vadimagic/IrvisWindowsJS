@@ -1,6 +1,8 @@
+"use strict"
+
 import "./slider"
-import modals from "./modules/modals"
+import modules from "./modules/modules"
 
 window.addEventListener('DOMContentLoaded', () => {
-	modals();
+	modules();
 })

@@ -29,16 +29,8 @@ const modals = () => {
 		})
 	}
 
-	function showModalByTime(selector, time) {
-		setTimeout(() => {
-			document.querySelector(selector).style.display = "block"
-			document.querySelector(selector).classList.add('modal-open')
-		}, time)
-	}
-
 	bindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close');
 	bindModal('.phone_link', '.popup', '.popup .popup_close');
-	showModalByTime('.popup_engineer', 60000)
 };
 
 export default modals;
