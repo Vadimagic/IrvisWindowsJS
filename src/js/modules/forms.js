@@ -5,7 +5,7 @@ const forms = () => {
 
 	phoneInputs.forEach(item => {
 		item.addEventListener("input", () => {
-			item.value = item.value.replace(/\D/, "")
+			item.value = item.value.replace(/\D/, "");
 		})
 	})
 
@@ -20,7 +20,7 @@ const forms = () => {
 		
 		let result = await fetch(url, {
 			method: "POST",
-			body: data
+			body: data,
 		});
 
 		return await result.text()
@@ -28,7 +28,7 @@ const forms = () => {
 
 	const clearinputs = () => {
 		input.forEach(item => {
-			item.value = ""
+			item.value = "";
 		})
 	}
 
@@ -36,25 +36,24 @@ const forms = () => {
 		item.addEventListener('submit', (e) => {
 			e.preventDefault();
 
-			let statusMessage = document.createElement('div')
-			statusMessage.classList.add('status')
-			item.appendChild(statusMessage)
+			let statusMessage = document.createElement('div');
+			statusMessage.classList.add('status');
+			item.appendChild(statusMessage);
 
 			const formData = new FormData(item);
 
 			postData('assets/server.php', formData)
-				.then(result => {
-					console.log(result)
-					statusMessage.textContent = message.success
+				.then(() => {
+					statusMessage.textContent = message.success;
 				})
 				.catch(() => {
-					statusMessage.textContent = message.failure
+					statusMessage.textContent = message.failure;
 				})
 				.finally(() => {
 					clearinputs();
 					setTimeout(() => {
-						statusMessage.remove()
-					}, 3000)
+						statusMessage.remove();
+					}, 10000);
 				})
 		})
 	})
