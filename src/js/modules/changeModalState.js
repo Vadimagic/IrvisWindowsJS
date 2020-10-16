@@ -5,7 +5,7 @@ const changeModalState = (state) => {
 			windowWidth = document.querySelectorAll('#width'), 
 			windowHeight = document.querySelectorAll('#height'), 
 			windowType = document.querySelectorAll('#view_type'), 
-			windowProdile = document.querySelectorAll('.checkbox');
+			windowProfile = document.querySelectorAll('.checkbox');
 
 	checkNumInputs('#width')
 	checkNumInputs('#height')
@@ -13,11 +13,28 @@ const changeModalState = (state) => {
 	function bindActionToElems(event, elem, prop) {
 		elem.forEach((item, i) => {
 			item.addEventListener(event, () => {
-				if (elem.length > 1) {
-					state[prop] = i;
-				} else {
-					state[prop] = item.value
+				switch(item.nodeName) {
+					case 'SPAN' :
+						state[prop] = i;
+						break
+					case 'INPUT' :
+						if (item.getAttribute('type') === 'checkbox') {
+							state[prop] = i === 0 ? 'Холодное' : 'Теплое';
+							elem.forEach((box, j) => {
+								box.checked = false
+								if (i == j) {
+									box.checked = true;
+								}
+							})
+						} else {
+							state[prop] = item.value
+						}
+						break;
+					case 'SELECT' :
+						state[prop] = item.value
+						break
 				}
+				console.log(state)
 			})
 		})
 	}
@@ -25,6 +42,8 @@ const changeModalState = (state) => {
 	bindActionToElems('click', windowForm, 'form')
 	bindActionToElems('input', windowWidth, 'width')
 	bindActionToElems('input', windowHeight, 'height')
+	bindActionToElems('change', windowType, 'type')
+	bindActionToElems('change', windowProfile, 'profile')
 };
 
 export default changeModalState

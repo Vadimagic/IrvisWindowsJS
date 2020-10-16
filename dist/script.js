@@ -17825,18 +17825,40 @@ var changeModalState = function changeModalState(state) {
       windowWidth = document.querySelectorAll('#width'),
       windowHeight = document.querySelectorAll('#height'),
       windowType = document.querySelectorAll('#view_type'),
-      windowProdile = document.querySelectorAll('.checkbox');
+      windowProfile = document.querySelectorAll('.checkbox');
   Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_1__["default"])('#width');
   Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_1__["default"])('#height');
 
   function bindActionToElems(event, elem, prop) {
     elem.forEach(function (item, i) {
       item.addEventListener(event, function () {
-        if (elem.length > 1) {
-          state[prop] = i;
-        } else {
-          state[prop] = item.value;
+        switch (item.nodeName) {
+          case 'SPAN':
+            state[prop] = i;
+            break;
+
+          case 'INPUT':
+            if (item.getAttribute('type') === 'checkbox') {
+              state[prop] = i === 0 ? 'Холодное' : 'Теплое';
+              elem.forEach(function (box, j) {
+                box.checked = false;
+
+                if (i == j) {
+                  box.checked = true;
+                }
+              });
+            } else {
+              state[prop] = item.value;
+            }
+
+            break;
+
+          case 'SELECT':
+            state[prop] = item.value;
+            break;
         }
+
+        console.log(state);
       });
     });
   }
@@ -17844,6 +17866,8 @@ var changeModalState = function changeModalState(state) {
   bindActionToElems('click', windowForm, 'form');
   bindActionToElems('input', windowWidth, 'width');
   bindActionToElems('input', windowHeight, 'height');
+  bindActionToElems('change', windowType, 'type');
+  bindActionToElems('change', windowProfile, 'profile');
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (changeModalState);
@@ -17906,7 +17930,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var forms = function forms() {
+var forms = function forms(state) {
   var form = document.querySelectorAll("form"),
       input = document.querySelectorAll("input");
   Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_5__["default"])('input[name="user_phone"]');
@@ -17958,6 +17982,13 @@ var forms = function forms() {
       statusMessage.classList.add('status');
       item.appendChild(statusMessage);
       var formData = new FormData(item);
+
+      if (item.getAttribute('data-calc') === "end") {
+        for (var key in state) {
+          formData.append(key, state[key]);
+        }
+      }
+
       postData('assets/server.php', formData).then(function () {
         statusMessage.textContent = message.success;
       }).catch(function () {
@@ -18076,14 +18107,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var modules = function modules() {
-  var modalState = {};
+  var modalState = {
+    form: 0
+  };
+  Object(_changeModalState__WEBPACK_IMPORTED_MODULE_4__["default"])(modalState);
   Object(_modals__WEBPACK_IMPORTED_MODULE_0__["default"])();
   Object(_modalTime__WEBPACK_IMPORTED_MODULE_1__["default"])('.popup_engineer', 60000);
   Object(_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".glazing_slider", ".glazing_block", ".glazing_content", "active");
   Object(_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".decoration_slider", ".no_click", ".decoration_content > div > div", "after_click");
   Object(_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".balcon_icons", ".balcon_icons_img", ".big_img > img", 'do_image_more', 'inline-block');
-  Object(_forms__WEBPACK_IMPORTED_MODULE_3__["default"])();
-  Object(_changeModalState__WEBPACK_IMPORTED_MODULE_4__["default"])(modalState);
+  Object(_forms__WEBPACK_IMPORTED_MODULE_3__["default"])(modalState);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modules);
