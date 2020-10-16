@@ -18006,6 +18006,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var modules = function modules() {
+  var modalState = {};
   Object(_modals__WEBPACK_IMPORTED_MODULE_0__["default"])();
   Object(_modalTime__WEBPACK_IMPORTED_MODULE_1__["default"])('.popup_engineer', 60000);
   Object(_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".glazing_slider", ".glazing_block", ".glazing_content", "active");

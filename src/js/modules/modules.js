@@ -4,6 +4,9 @@ import tabs from "./tabs"
 import forms from "./forms"
 
 const modules = () => {
+
+	let modalState = {};
+
 	modals();
 	modalTime('.popup_engineer', 60000);
 	tabs(".glazing_slider", ".glazing_block", ".glazing_content", "active");
