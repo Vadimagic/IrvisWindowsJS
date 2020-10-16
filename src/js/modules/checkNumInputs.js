@@ -1,7 +1,7 @@
 const checkNumInputs = (selector) => {
-	const phoneInputs = document.querySelectorAll(selector);
+	const inputs = document.querySelectorAll(selector);
 
-	phoneInputs.forEach(item => {
+	inputs.forEach(item => {
 		item.addEventListener("input", () => {
 			item.value = item.value.replace(/\D/, "");
 		})

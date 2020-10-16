@@ -17805,6 +17805,51 @@ window.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
+/***/ "./src/js/modules/changeModalState.js":
+/*!********************************************!*\
+  !*** ./src/js/modules/changeModalState.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _checkNumInputs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./checkNumInputs */ "./src/js/modules/checkNumInputs.js");
+
+
+
+var changeModalState = function changeModalState(state) {
+  var windowForm = document.querySelectorAll('.balcon_icons_img'),
+      windowWidth = document.querySelectorAll('#width'),
+      windowHeight = document.querySelectorAll('#height'),
+      windowType = document.querySelectorAll('#view_type'),
+      windowProdile = document.querySelectorAll('.checkbox');
+  Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_1__["default"])('#width');
+  Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_1__["default"])('#height');
+
+  function bindActionToElems(event, elem, prop) {
+    elem.forEach(function (item, i) {
+      item.addEventListener(event, function () {
+        if (elem.length > 1) {
+          state[prop] = i;
+        } else {
+          state[prop] = item.value;
+        }
+      });
+    });
+  }
+
+  bindActionToElems('click', windowForm, 'form');
+  bindActionToElems('input', windowWidth, 'width');
+  bindActionToElems('input', windowHeight, 'height');
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (changeModalState);
+
+/***/ }),
+
 /***/ "./src/js/modules/checkNumInputs.js":
 /*!******************************************!*\
   !*** ./src/js/modules/checkNumInputs.js ***!
@@ -17822,8 +17867,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var checkNumInputs = function checkNumInputs(selector) {
-  var phoneInputs = document.querySelectorAll(selector);
-  phoneInputs.forEach(function (item) {
+  var inputs = document.querySelectorAll(selector);
+  inputs.forEach(function (item) {
     item.addEventListener("input", function () {
       item.value = item.value.replace(/\D/, "");
     });
@@ -18023,6 +18068,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modalTime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modalTime */ "./src/js/modules/modalTime.js");
 /* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tabs */ "./src/js/modules/tabs.js");
 /* harmony import */ var _forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./forms */ "./src/js/modules/forms.js");
+/* harmony import */ var _changeModalState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./changeModalState */ "./src/js/modules/changeModalState.js");
+
 
 
 
@@ -18036,6 +18083,7 @@ var modules = function modules() {
   Object(_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".decoration_slider", ".no_click", ".decoration_content > div > div", "after_click");
   Object(_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".balcon_icons", ".balcon_icons_img", ".big_img > img", 'do_image_more', 'inline-block');
   Object(_forms__WEBPACK_IMPORTED_MODULE_3__["default"])();
+  Object(_changeModalState__WEBPACK_IMPORTED_MODULE_4__["default"])(modalState);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modules);
