@@ -4,6 +4,7 @@ import tabs from "./tabs"
 import forms from "./forms"
 import changeModalState from "./changeModalState"
 import timer from "./timer"
+import images from "./images"
 
 const modules = () => {
 
@@ -16,6 +17,7 @@ const modules = () => {
 	tabs(".decoration_slider", ".no_click", ".decoration_content > div > div", "after_click");
 	tabs(".balcon_icons", ".balcon_icons_img", ".big_img > img", 'do_image_more', 'inline-block');
 	timer("#timer", "2020-10-20")
+	images()
 	forms(modalState);
 }
 

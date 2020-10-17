@@ -27,6 +27,8 @@ const timer = (selector, deadline) => {
 				days = timer.querySelector('#days'),
 				timeInterval = setInterval(updateClock, 1000);
 
+		updateClock();
+
 		function updateClock() {
 			const t = getTimeRemaining(endtime);
 
