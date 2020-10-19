@@ -18084,7 +18084,8 @@ var modals = function modals() {
     var trigger = document.querySelectorAll(triggerSelector),
         modal = document.querySelector(modalSelector),
         close = document.querySelector(closeSelector),
-        windows = document.querySelectorAll('[data-modal');
+        windows = document.querySelectorAll('[data-modal'),
+        scroll = calcScroll();
     trigger.forEach(function (item) {
       item.addEventListener("click", function (e) {
         if (e.target) {
@@ -18096,6 +18097,7 @@ var modals = function modals() {
         });
         modal.style.display = "block";
         document.body.classList.add('modal-open');
+        document.body.style.marginRight = "".concat(scroll, "px");
       });
     });
     close.addEventListener('click', function () {
@@ -18111,6 +18113,15 @@ var modals = function modals() {
         document.body.classList.remove('modal-open');
       }
     });
+  }
+
+  function calcScroll() {
+    var div = document.createElement('div');
+    div.style.cssText = "width: 50px; height: 50px; overflowY: scroll; visibility: hidden";
+    document.body.appendChild(div);
+    var scrollWidth = div.offsetWidth - div.clientWidth;
+    div.remove();
+    return scrollWidth;
   }
 
   bindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close');
@@ -18154,7 +18165,7 @@ var modules = function modules() {
   };
   Object(_changeModalState__WEBPACK_IMPORTED_MODULE_4__["default"])(modalState);
   Object(_modals__WEBPACK_IMPORTED_MODULE_0__["default"])();
-  Object(_modalTime__WEBPACK_IMPORTED_MODULE_1__["default"])('.popup_engineer', 60000);
+  Object(_modalTime__WEBPACK_IMPORTED_MODULE_1__["default"])('.popup_engineer', 120000);
   Object(_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".glazing_slider", ".glazing_block", ".glazing_content", "active");
   Object(_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".decoration_slider", ".no_click", ".decoration_content > div > div", "after_click");
   Object(_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".balcon_icons", ".balcon_icons_img", ".big_img > img", 'do_image_more', 'inline-block');
