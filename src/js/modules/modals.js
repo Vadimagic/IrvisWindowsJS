@@ -7,8 +7,6 @@ const modals = () => {
 				windows = document.querySelectorAll('[data-modal'),
 				scroll = calcScroll();
 
-		console.log(scroll)
-
 		trigger.forEach(item => {
 			item.addEventListener("click", (e)=> {
 				if (e.target) {

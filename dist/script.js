@@ -18066,7 +18066,6 @@ var modals = function modals() {
         close = document.querySelector(closeSelector),
         windows = document.querySelectorAll('[data-modal'),
         scroll = calcScroll();
-    console.log(scroll);
     trigger.forEach(function (item) {
       item.addEventListener("click", function (e) {
         if (e.target) {
@@ -18168,7 +18167,7 @@ var modules = function modules() {
   Object(_tabs__WEBPACK_IMPORTED_MODULE_1__["default"])(".glazing_slider", ".glazing_block", ".glazing_content", "active");
   Object(_tabs__WEBPACK_IMPORTED_MODULE_1__["default"])(".decoration_slider", ".no_click", ".decoration_content > div > div", "after_click");
   Object(_tabs__WEBPACK_IMPORTED_MODULE_1__["default"])(".balcon_icons", ".balcon_icons_img", ".big_img > img", 'do_image_more', 'inline-block');
-  Object(_timer__WEBPACK_IMPORTED_MODULE_4__["default"])("#timer", "2020-10-20");
+  Object(_timer__WEBPACK_IMPORTED_MODULE_4__["default"])("#timer", "2021-11-20");
   Object(_images__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_forms__WEBPACK_IMPORTED_MODULE_2__["default"])(modalState);
 };
