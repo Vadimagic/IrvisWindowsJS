@@ -7,6 +7,8 @@ const modals = () => {
 				windows = document.querySelectorAll('[data-modal'),
 				scroll = calcScroll();
 
+		console.log(scroll)
+
 		trigger.forEach(item => {
 			item.addEventListener("click", (e)=> {
 				if (e.target) {
@@ -18,14 +20,15 @@ const modals = () => {
 				})
 	
 				modal.style.display = "block";
-				document.body.classList.add('modal-open');
+				document.body.style.overflow = "hidden"
 				document.body.style.marginRight = `${scroll}px`;
 			});
 		})
 
 		close.addEventListener('click', () => {
 			modal.style.display = "none"
-			document.body.classList.remove('modal-open')
+			document.body.style.overflow = ""
+			document.body.style.marginRight = `0px`;
 		});
 
 		modal.addEventListener('click', (e) => {
@@ -36,15 +39,36 @@ const modals = () => {
 				})
 
 				modal.style.display = "none"
-				document.body.classList.remove('modal-open')
+				document.body.style.overflow = ""
+				document.body.style.marginRight = `0px`;
 			}
 		})
+	}
+
+	function modalTime(selector, time){
+		const scroll = calcScroll()
+			
+		setTimeout(() => {
+			let display;
+			document.querySelectorAll('[data-modal]').forEach((item) => {
+				if (getComputedStyle(item).display !== 'none') {
+					display = "block"
+				}
+			})
+	
+			if (!display) {
+				document.querySelector(selector).style.display = "block"
+				document.body.style.overflow = "hidden"
+				document.body.style.marginRight = `${scroll}px`;
+			}
+			
+		}, time)
 	}
 
 	function calcScroll() {
 		let div = document.createElement('div')
 
-		div.style.cssText = "width: 50px; height: 50px; overflowY: scroll; visibility: hidden";
+		div.style.cssText = "width: 50px; height: 50px; overflow-y: scroll; visibility: hidden";
 
 		document.body.appendChild(div)
 		let scrollWidth = div.offsetWidth - div.clientWidth;
@@ -58,6 +82,8 @@ const modals = () => {
 	bindModal('.popup_calc_btn', '.popup_calc', '.popup_calc_close');
 	bindModal('.popup_calc_button', '.popup_calc_profile', '.popup_calc_profile_close', false);
 	bindModal('.popup_calc_profile_button', '.popup_calc_end', '.popup_calc_end_close', false);
+
+	modalTime('.popup_engineer', 60000);
 };
 
 export default modals;
